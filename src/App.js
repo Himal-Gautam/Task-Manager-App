@@ -1,23 +1,24 @@
 import logo from './logo.svg';
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavBar } from "./Components/NavBar";
+import { Profile } from "./Components/Profile";
+import { NotFoundPage } from "./Components/NotFoundPage";
+import { Route, Routes, Navigate, BrowserRouter as Router  } from "react-router-dom";
+import { SignIn } from  "./Components/SignInSide"
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar/>
+      <Routes>
+          <Route path="/" element={<Navigate replace to="/login" />} exact />
+          <Route path="/login" element={<SignIn />} />
+          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/dashboard/profile" element={<Profile />} />
+          <Route path="/*/*" element={<NotFoundPage />} />
+        </Routes>
     </div>
   );
 }
