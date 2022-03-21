@@ -3,10 +3,13 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavBar } from "./Components/NavBar";
 import { Profile } from "./Components/Profile";
+import { ReactSession } from "react-client-session";
 import { NotFoundPage } from "./Components/NotFoundPage";
 import { Route, Routes, Navigate, BrowserRouter as Router  } from "react-router-dom";
-import { SignIn } from  "./Components/SignInSide"
+import { SignIn } from  "./Components/SignIn"
 import './App.css';
+
+ReactSession.setStoreType("localstorage");
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
       <NavBar/>
       <Routes>
           <Route path="/" element={<Navigate replace to="/login" />} exact />
-          <Route path="/login" element={<SignIn />} />
+          <Route path="/login" element={<SignIn/>} />
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/*/*" element={<NotFoundPage />} />
