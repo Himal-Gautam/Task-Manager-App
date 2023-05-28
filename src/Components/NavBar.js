@@ -6,6 +6,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import TaskIcon from '@mui/icons-material/Task';
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -100,7 +101,6 @@ export function NavBar() {
 function NavBar_() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [section, setSection] = React.useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname.split("/");
@@ -182,7 +182,7 @@ function NavBar_() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["profile", "academics", "notices", "links"].map((text, index) => (
+          {["profile", "tasks"].map((text, index) => (
             <ListItemButton
               key={text}
               sx={{
@@ -204,9 +204,7 @@ function NavBar_() {
                 }}
               >
                 {index === 0 ? <PersonIcon color="primary" /> : <></>}
-                {index === 1 ? <MenuBookIcon color="primary" /> : <></>}
-                {index === 2 ? <FeedbackIcon color="primary" /> : <></>}
-                {index === 3 ? <LinkIcon color="primary" /> : <></>}
+                {index === 1 ? <TaskIcon color="primary" /> : <></>}
               </ListItemIcon>
               </Tooltip>
               <ListItemText

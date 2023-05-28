@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.area{
+  padding:100px 45px 45px 100px
+}
+
+.profile, .profileData, .tasksList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap:15px;
+  width: 100%;
+
+}
+
+.profile-actions{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.profileDetails{
+    height: "100"
+   }
+
+   .tasksList{
+     justify-content: center;
+   }

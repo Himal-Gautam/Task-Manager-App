@@ -46,7 +46,7 @@ export function SignIn() {
       fetch("http://localhost:4000/users/login", {
         method: "POST",
         body: JSON.stringify({
-          uid: data.get("email"),
+          email: data.get("email"),
           password: data.get("password"),
         }),
         headers: {

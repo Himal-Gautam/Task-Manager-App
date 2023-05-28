@@ -10,6 +10,8 @@ import Container from "@mui/material/Container";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
+import Divider from "@mui/material/Divider";
+import Chip from "@mui/material/Chip";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -38,8 +40,6 @@ export function Profile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.name = data.name.toUpperCase();
-        data.role = data.role.toUpperCase();
         setUser(data);
       })
       .catch((err) => {
@@ -50,63 +50,40 @@ export function Profile() {
   return (
     <div className="profile area">
       <FormDialog open={open} setOpen={setOpen} />
-      <Card sx={{ display: "flex", minWidth: 300 }} variant="outlined">
-        <CardMedia
-          component="img"
-          sx={{ maxWidth: 150, minHeight: 150 }}
-          image={user.image}
-          alt="Live from space album cover"
-        />
-        <div style={{ textAlign: "left", height: "100" }}>
-          <CardContent>
-            <Typography component="div" variant="h5">
-              <b>{user.name}</b>
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              <b>{user.role}</b>
-            </Typography>
-          </CardContent>
-        </div>
-      </Card>
-      <Card sx={{ minWidth: 300 }} variant="outlined">
-        <Typography component="div" variant="h5" style={{ margin: "10px" }}>
-          Details
+      <Card variant="outlined">
+        <CardContent>
+        <div className="profileData">
+        <Typography component="div" variant="h5" style={{ margin: "15px" }}>
+          Profile Details
         </Typography>
-        <div style={{ textAlign: "left" }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              UID
-            </Typography>
-            <Typography variant="h6" component="div" gutterBottom>
-              {user.uid}
-            </Typography>
-            <hr />
-            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              Age
-            </Typography>
-            <Typography variant="h6" component="div" gutterBottom>
-              {user.age}
-            </Typography>
-            <hr />
-            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              Phone no
-            </Typography>
-            <Typography variant="h6" component="div" gutterBottom>
-              {user.phone}
-            </Typography>
-            <hr />
-            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-              Email
-            </Typography>
-            <Typography variant="h6" component="div" gutterBottom>
-              {user.email}
-            </Typography>
-          </CardContent>
-        </div>
+          <Divider>
+            <Chip label="NAME" />
+          </Divider>
+          <Typography component="div" variant="h5">
+            {user.name}
+          </Typography>
+          <Divider>
+            <Chip label="AGE" />
+          </Divider>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            <b>{user.age}</b>
+          </Typography>
+          <Divider>
+            <Chip label="EMAIL" />
+          </Divider>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            <b>{user.email}</b>
+          </Typography>
+          </div>
+        </CardContent>
       </Card>
       <Card sx={{ minWidth: 300 }} variant="outlined">
         <Typography component="div" variant="h5" style={{ margin: "10px" }}>
@@ -124,14 +101,12 @@ export function Profile() {
   );
 }
 
-
 function FormDialog({ open, setOpen }) {
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleSubmit = () => {
-
     fetch("http://localhost:4000/users/me", {
       method: "PATCH",
       body: JSON.stringify({
@@ -141,10 +116,9 @@ function FormDialog({ open, setOpen }) {
         Authorization: "Bearer " + ReactSession.get("token"),
         "Content-Type": "application/json; charset=UTF-8",
       }),
-    })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
 
     setOpen(false);
   };
@@ -158,9 +132,7 @@ function FormDialog({ open, setOpen }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Change Password</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Change your Login Password here
-          </DialogContentText>
+          <DialogContentText>Change your Login Password here</DialogContentText>
           <TextField
             required
             variant="filled"
@@ -168,7 +140,7 @@ function FormDialog({ open, setOpen }) {
             margin="dense"
             id="old_password"
             label="Old Password"
-            onChange={e => setOldPassword(e.target.value)}
+            onChange={(e) => setOldPassword(e.target.value)}
             type="password"
             fullWidth
           />
@@ -180,7 +152,7 @@ function FormDialog({ open, setOpen }) {
             margin="dense"
             id="new_password"
             label="New Password"
-            onChange={e => setNewPassword(e.target.value)}
+            onChange={(e) => setNewPassword(e.target.value)}
             type="password"
             fullWidth
           />
@@ -192,7 +164,7 @@ function FormDialog({ open, setOpen }) {
             margin="dense"
             id="confirm_password"
             label="Confirm New Password"
-            onChange={e => setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             type="password"
             fullWidth
           />
@@ -205,4 +177,3 @@ function FormDialog({ open, setOpen }) {
     </div>
   );
 }
-
